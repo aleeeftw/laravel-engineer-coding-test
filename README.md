@@ -1,4 +1,4 @@
-# SAMPL test
+# Sampl test
 
 - Requirements:
     - PHP 8.4+ (as set in composer.json).
