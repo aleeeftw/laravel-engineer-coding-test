@@ -11,6 +11,6 @@ enum TaskStatus: string
 {
     use ValuesTrait;
 
-    case ACTIVE = 'active';
+    case COMPLETED = 'completed';
     case PENDING = 'pending';
 }

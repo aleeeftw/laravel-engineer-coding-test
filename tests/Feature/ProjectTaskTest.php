@@ -16,14 +16,14 @@ test('project task - filtering and sorting', function (): void {
     $this->actingAs($project->user);
 
     $tasks = $project->tasks
-        ->where('status', '=', TaskStatus::ACTIVE->value)
+        ->where('status', '=', TaskStatus::COMPLETED->value)
         ->sortByDesc(fn (Task $task): string => $task->assigned_user->name);
 
     $response = $this->getJson(action(
         [ProjectTaskController::class, 'index'],
         [
             'project' => $project->id,
-            'filterBy' => ['status' => 'active'],
+            'filterBy' => ['status' => 'completed'],
             'sortBy' => ['assigned_user_name' => 'desc'],
             'offset' => 0,
             'limit' => 10,
