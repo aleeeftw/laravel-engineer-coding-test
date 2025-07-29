@@ -18,7 +18,8 @@ return new class extends Migration
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->timestamp('deleted_at')->nullable();
-            $table->index('name', 'ik_project_name');
+            // Here we could have an index to search by name.
+            $table->index(['name'], 'ik_project_name');
             $table
                 ->foreign('user_id', 'fk_project_user')
                 ->references('id')

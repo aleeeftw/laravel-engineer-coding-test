@@ -21,8 +21,14 @@ return new class extends Migration
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->timestamp('deleted_at')->nullable();
-            $table->index('title', 'ik_task_title');
-            $table->index('status', 'ik_task_status');
+            // Index to search by project and status as the document requires.
+            $table->index(['project_id', 'status'], 'ik_task_project_id_status');
+            // Here we could also have another index to search by project, title, and status.
+            // The index order should be:
+            //  - project_id
+            //  - title (higher cardinality, more values than the status)
+            //  - status (last because of the low cardinality, usually low number of distinct values)
+            $table->index(['project_id', 'title', 'status'], 'ik_task_project_id_title_status');
             $table
                 ->foreign('project_id', 'fk_task_project')
                 ->references('id')
