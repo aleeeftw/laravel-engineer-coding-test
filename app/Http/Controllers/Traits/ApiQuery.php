@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Config;
 // Cursor pagination should be better so we could also implement that instead of offset and limit.
 trait ApiQuery
 {
+    // Method can be split in a service with methods that have one responsibility.
+    // Since this is a prototype, and to keep things easy to follow, went with just one method.
     public function apiQueryApply(
         Request $request,
         Builder $query,
